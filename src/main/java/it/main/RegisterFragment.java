@@ -11,6 +11,8 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -55,7 +57,7 @@ public class RegisterFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.button);
         button.setOnClickListener((View v) -> {
-              SpidParams.Config params = new SpidParams.Config("https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", 60, "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it");
+              SpidParams.Config params = new SpidParams.Config("https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", 60, "https://www.spid.gov.it/", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it");
               IdentityProvider.Builder prov = new IdentityProvider.Builder()
                       .addPoste("", "")
                       .addIntesaSanPaolo("", "")
@@ -67,6 +69,11 @@ public class RegisterFragment extends Fragment
                       .addNamirial("", "")
                       .addSpidItalia("", "");
               launcher.launch(new SpidParams(params, prov.build()));
+        });
+        button = view.findViewById(R.id.button2);
+        button.setOnClickListener(v -> {
+            NavController nav = Navigation.findNavController(view);
+            nav.navigate(R.id.action_registerFragment_to_nfc_fragment);
         });
     }
 }

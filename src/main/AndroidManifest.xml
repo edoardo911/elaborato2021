@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.main">
 
+    <uses-permission android:name="android.permission.NFC"/>
     <application
         xmlns:tools="http://schemas.android.com/tools"
         tools:replace="android:theme"
@@ -14,6 +15,9 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
