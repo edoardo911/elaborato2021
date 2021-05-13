@@ -35,7 +35,7 @@ public class RegisterFragment extends Fragment
         else if(result.equals(SpidEvent.SESSION_TIMEOUT))
             Toast.makeText(getContext(), "Session Error", Toast.LENGTH_SHORT).show();
         else if(result.equals(SpidEvent.SPID_CONFIG_ERROR))
-            Toast.makeText(getContext(), "Lo sviluppatore e` un coglione", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Errore 0", Toast.LENGTH_SHORT).show();
         else if(result.equals(SpidEvent.SUCCESS))
         {
             Log.i(getClass().getSimpleName(), "cookies = " + result.getSpidResponse().getCookies());
