@@ -45,8 +45,8 @@ public class RegisterFragment extends Fragment
                     .show();
         }
         else if(result.equals(SpidEvent.USER_CANCELLED))
-            Toast.makeText(getContext(), "Sei un coglione", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(getContext(), "Non so cosa cazzo stia succedendo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Errore 1", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(getContext(), "Errore 2", Toast.LENGTH_SHORT).show();
     });
 
     public RegisterFragment() { super(R.layout.register_fragment); }
@@ -57,7 +57,7 @@ public class RegisterFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.button);
         button.setOnClickListener((View v) -> {
-              SpidParams.Config params = new SpidParams.Config("https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", 60, "https://www.spid.gov.it/", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it");
+              SpidParams.Config params = new SpidParams.Config("https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
               IdentityProvider.Builder prov = new IdentityProvider.Builder()
                       .addPoste("", "")
                       .addIntesaSanPaolo("", "")

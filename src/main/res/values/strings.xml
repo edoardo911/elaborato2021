@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Elaborato</string>
     <string name="spid">Entra con spid</string>
+    <string name="tessera">Avvicina la tessera al telefono per accedere</string>
 </resources>

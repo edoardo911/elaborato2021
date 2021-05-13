@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.io.UnsupportedEncodingException;
 
 public class NFCFragment extends Fragment
@@ -31,5 +34,13 @@ public class NFCFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        NfcAdapter adapter = NfcAdapter.getDefaultAdapter(getActivity());
+        String text = "";
+        if(adapter == null)
+            text = "NFC non disponibile";
+        else if(!adapter.isEnabled())
+            text = "Abilita l'NFC dalle impostazioni";
+        if(!text.equals(""))
+            Snackbar.make(view, text, BaseTransientBottomBar.LENGTH_LONG).show();
     }
 }
