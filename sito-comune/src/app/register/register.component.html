@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="title">Registrazione</div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="block">
+            <input id="email" type="text" formControlName="email" required/>
+            <label>Email</label>
+        </div>
+        <div class="block">
+            <input id="pwd" type="password" formControlName="pwd" required/>
+            <label>Password</label>
+        </div>
+        <div class="block">
+            <input id="pwd_confirm" type="password" formControlName="pwd_confirm" required/>
+            <label>Conferma Password</label>
+        </div>
+
+        <div class="errorDiv" [@tent]="error ? 'open' : 'closed'">{{ message }}</div>
+    
+        <span class="redirect">Hai già un account? Loggati <a routerLink="/login">qui</a>.</span>
+        <button>Registrati</button>
+    </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="title">Login</div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="block">
+            <input id="email" type="text" formControlName="email" required/>
+            <label>Email</label>
+        </div>
+        <div class="block">
+            <input id="pwd" type="password" formControlName="pwd" required/>
+            <label>Password</label>
+        </div>
+
+        <div class="errorDiv" [@tent]="error ? 'open' : 'closed'">Credenziali errate</div>
+    
+        <span class="redirect">Non hai un account? Registrati <a routerLink="/register">qui</a>.</span>
+        <button>Login</button>
+    </form>
+</div>
