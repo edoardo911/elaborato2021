@@ -13,8 +13,11 @@ import android.os.Parcelable;
 
 public class MainActivity extends AppCompatActivity
 {
-    PendingIntent intent;
-    NfcAdapter adapter;
+    public static int scene = -1;
+    public static boolean auth = false;
+
+    private PendingIntent intent;
+    private NfcAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

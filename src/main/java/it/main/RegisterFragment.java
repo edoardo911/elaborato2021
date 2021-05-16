@@ -24,7 +24,7 @@ import it.inps.spid.utils.*;
 public class RegisterFragment extends Fragment
 {
     ActivityResultLauncher launcher = registerForActivityResult(new IdentityProviderSelectorActivityContract(), result -> {
-        if(result.equals(SpidEvent.GENERIC_ERROR))
+        if(result.getSpidEvent().equals(SpidEvent.GENERIC_ERROR))
             Toast.makeText(getContext(), "Generic Error", Toast.LENGTH_SHORT).show();
         else if(result.equals(SpidEvent.NETWORK_ERROR))
             new MaterialAlertDialogBuilder(getContext())
@@ -32,11 +32,11 @@ public class RegisterFragment extends Fragment
                     .setMessage("Nessuna connessione a internet")
                     .setPositiveButton("Ok", (dialog, which) -> { dialog.dismiss(); })
                     .show();
-        else if(result.equals(SpidEvent.SESSION_TIMEOUT))
+        else if(result.getSpidEvent().equals(SpidEvent.SESSION_TIMEOUT))
             Toast.makeText(getContext(), "Session Error", Toast.LENGTH_SHORT).show();
-        else if(result.equals(SpidEvent.SPID_CONFIG_ERROR))
-            Toast.makeText(getContext(), "Errore 0", Toast.LENGTH_SHORT).show();
-        else if(result.equals(SpidEvent.SUCCESS))
+        else if(result.getSpidEvent().equals(SpidEvent.SPID_CONFIG_ERROR))
+            Toast.makeText(getContext(), "Config Error", Toast.LENGTH_SHORT).show();
+        else if(result.getSpidEvent().equals(SpidEvent.SUCCESS))
         {
             Log.i(getClass().getSimpleName(), "cookies = " + result.getSpidResponse().getCookies());
             new MaterialAlertDialogBuilder(getContext())
@@ -44,9 +44,9 @@ public class RegisterFragment extends Fragment
                     .setPositiveButton("Ok", (dialog, which) -> { dialog.dismiss(); })
                     .show();
         }
-        else if(result.equals(SpidEvent.USER_CANCELLED))
+        else if(result.getSpidEvent().equals(SpidEvent.USER_CANCELLED))
             Toast.makeText(getContext(), "Errore 1", Toast.LENGTH_SHORT).show();
-        else Toast.makeText(getContext(), "Errore 2", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show();
     });
 
     public RegisterFragment() { super(R.layout.register_fragment); }
@@ -55,25 +55,25 @@ public class RegisterFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        MainActivity.scene = -1;
         Button button = view.findViewById(R.id.button);
         button.setOnClickListener((View v) -> {
-              SpidParams.Config params = new SpidParams.Config("https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", "https://www.alus.it/pubs/CodiceFiscale/index.php?lang=it", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
+              SpidParams.Config params = new SpidParams.Config("https://idptest.spid.gov.it/", "https://idptest.spid.gov.it/", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
               IdentityProvider.Builder prov = new IdentityProvider.Builder()
-                      .addPoste("", "")
-                      .addIntesaSanPaolo("", "")
-                      .addTim("", "")
-                      .addAruba("", "")
-                      .addInfocert("", "")
-                      .addSielte("", "")
-                      .addLepida("", "")
-                      .addNamirial("", "")
-                      .addSpidItalia("", "");
-              launcher.launch(new SpidParams(params, prov.build()));
+                      .addCustomIdentityProvider("", R.drawable.ic_spid_idp_posteid, "https://crypto.aliaslab.net");
+              SpidParams p = new SpidParams(params, prov.build());
+              launcher.launch(p);
         });
+
+        NavController nav = Navigation.findNavController(view);
         button = view.findViewById(R.id.button2);
         button.setOnClickListener(v -> {
-            NavController nav = Navigation.findNavController(view);
             nav.navigate(R.id.action_registerFragment_to_nfc_fragment);
+        });
+
+        button = view.findViewById(R.id.button3);
+        button.setOnClickListener(v -> {
+            nav.navigate(R.id.action_registerFragment_to_login_fragment);
         });
     }
 }

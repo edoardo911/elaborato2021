@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_registerFragment_to_nfc_fragment"
             app:destination="@id/nfc_fragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_login_fragment"
+            app:destination="@id/login_fragment" />
     </fragment>
 
     <fragment
@@ -20,4 +23,18 @@
             android:id="@+id/action_nfc_fragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="it.main.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_login_fragment_to_auth_fragment"
+            app:destination="@id/auth_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/auth_fragment"
+        android:name="it.main.AuthFragment"
+        android:label="AuthFragment" />
 </navigation>

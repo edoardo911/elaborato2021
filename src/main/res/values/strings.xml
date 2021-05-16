@@ -2,4 +2,11 @@
     <string name="app_name">Elaborato</string>
     <string name="spid">Entra con spid</string>
     <string name="tessera">Avvicina la tessera al telefono per accedere</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="error">Errore: credenziali errate</string>
+    <string name="account">Non hai un account? Clicca</string>
+    <string name="qui">qui</string>
+    <string name="nonAuth">Questo utente non è autorizzato, passa la tessera sul lettore NFC per diventare amministratore</string>
 </resources>
