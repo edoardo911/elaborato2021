@@ -44,7 +44,7 @@ public class LoginFragment extends Fragment
         Button button = view.findViewById(R.id.login);
 
         qui.setOnClickListener(v -> {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://192.168.1.106:4200/register"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://vaccinationdata.duckdns.org/register"));
             startActivity(browserIntent);
         });
 

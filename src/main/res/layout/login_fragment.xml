@@ -120,7 +120,7 @@
                 android:background="@drawable/custom_button"
                 android:text="@string/login"
                 android:textColor="@android:color/secondary_text_dark"
-                app:backgroundTint=""
+                app:backgroundTint="@android:color/secondary_text_dark"
                 app:iconPadding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

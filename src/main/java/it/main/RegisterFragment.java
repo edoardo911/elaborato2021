@@ -58,9 +58,9 @@ public class RegisterFragment extends Fragment
         MainActivity.scene = -1;
         Button button = view.findViewById(R.id.button);
         button.setOnClickListener((View v) -> {
-              SpidParams.Config params = new SpidParams.Config("https://idptest.spid.gov.it/", "https://idptest.spid.gov.it/", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
+              SpidParams.Config params = new SpidParams.Config("https://vaccinationdata.duckdns.org:8088/", "https://vaccinationdata.duckdns.org:8088/", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
               IdentityProvider.Builder prov = new IdentityProvider.Builder()
-                      .addCustomIdentityProvider("", R.drawable.ic_spid_idp_posteid, "https://crypto.aliaslab.net");
+                      .addCustomIdentityProvider("asd", R.drawable.ic_spid_idp_posteid, "https://vaccinationdata.duckdns.org:8088/");
               SpidParams p = new SpidParams(params, prov.build());
               launcher.launch(p);
         });
