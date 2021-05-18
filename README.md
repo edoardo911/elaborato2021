@@ -9,4 +9,4 @@ programmato prevalentemente in TypeScript, un linguaggio moderno realizzato sull
 HTML, CSS e vari JSON di configurazione. Il sito comunica con firebase, un sito che fornisce database non relazionali sul quale memorizziamo i
 dati degli utenti e dei vaccinati. Si presenta come una pagina che consente sia login sia registrazione. In seguito, se l'account sarà stato autenticato
 dall'app, consentirà la visualizzazione delle pagine statistiche, dove l'utente potrà vedere in due pagine diverse rispettivamente tutti gli utenti
-vaccinati e dei grafici statistici riguardo gli utenti vaccinati. Al momento il sito si trova su vaccinationdata.duckdns.org.
+vaccinati e dei grafici statistici riguardo gli utenti vaccinati. Al momento il sito si trova su http://vaccinationdata.duckdns.org.
