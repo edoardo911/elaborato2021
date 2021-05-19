@@ -1,0 +1,26 @@
+<header>
+    <svg class="hamburger" (click)="toggleMenu()">
+        <rect [@top]="menu_open ? 'cross' : 'hamburger'" id="top" x="10%" y="23%" rx="3"/>
+        <rect [@center]="menu_open ? 'shrink' : 'open'" id="center" x="10%" y="45%" rx="3"/>
+        <rect [@bottom]="menu_open ? 'cross' : 'hamburger'" id="bottom" x="10%" y="68%" rx="3"/>
+    </svg>
+
+    <div class="headerItems">
+        <div class="headerDiv" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span>Lista vaccinati</span></div>
+        <div class="headerDiv" routerLink="/graph" routerLinkActive="active"><span>Dati statistici</span></div>
+    </div>
+
+    <img src="../../assets/logo_full.png"/>
+
+    <div class="headerItems">
+        <div class="headerDiv" routerLink="/login"><span>Login</span></div>
+        <div class="headerDiv" (click)="logout()"><span>Logout</span></div>
+    </div>
+</header>
+
+<div class="hamburger-menu" [@menu]="menu_open ? 'open' : 'closed'">
+    <div class="item" routerLink="/"><span>Lista vaccinati</span></div>
+    <div class="item" routerLink="/graph"><span>Dati statistici</span></div>
+    <div class="item" routerLink="/login"><span>Login</span></div>
+    <div class="item" (click)="logout()"><span>Logout</span></div>
+</div>

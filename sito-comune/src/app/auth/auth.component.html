@@ -1,4 +1,30 @@
-<div class="centralText">
+<div *ngIf="!auth; else elseBlock" class="centralText">
     Utente non autorizzato.<br/>
     Scannerizzare la tessera sull'app per diventare un amministratore
 </div>
+<ng-template #elseBlock>
+    <auth-header></auth-header>
+    <div class="content">
+        <div *ngFor="let user of vaccinati; let i = index">
+            <div class="user" (click)="onClick(i)" [@borders]="open[i] ? 'open' : 'closed'">
+                <div>
+                    <div class="user-name">{{ user.nome }} {{ user.cognome }}</div>
+                    <div class="user-cf" [@rect]="open[i] ? 'open' : 'closed'">{{ user.codiceFiscale }}</div>
+                </div>
+                <div class="svg">
+                    <svg class="arrow" [@arrow]="open[i] ? 'open' : 'closed'">
+                        <rect id="r1" x="15" y="4" rx="3" [@rect]="open[i] ? 'open' : 'closed'"/>
+                        <rect id="r2" x="-8" y="40" rx="3" [@rect]="open[i] ? 'open' : 'closed'"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="userMenu" [@menu]="open[i] ? 'open' : 'closed'">
+                <span class="gender">{{ user.genere }}</span>
+                <span>Nato il {{ user.dataNascita }} a {{ user.provincia }} ({{ user.nazioneNascita }})</span>
+                <span>Risiede a {{ user.residenza }}, {{ user.indirizzo }}</span>
+                <span>{{ getVerb(user.dataVaccino1) }} la prima dose di {{ user.vaccino }} il {{ user.dataVaccino1 }}</span>
+                <span>{{ getVerb(user.dataVaccino2) }} la seconda dose di {{ user.vaccino }} il {{ user.dataVaccino2 }}</span>
+            </div>
+        </div>
+    </div>
+</ng-template>

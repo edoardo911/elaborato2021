@@ -17,8 +17,7 @@ import { CookieService } from "ngx-cookie-service";
                 transform: 'scaleY(0)',
                 height: '0px'
             })),
-            transition('open => closed', animate('0.4s ease-in-out')),
-            transition('closed => open', animate('0.4s ease-in-out'))
+            transition('open <=> closed', animate('0.4s ease-in-out'))
         ])
     ]
 })

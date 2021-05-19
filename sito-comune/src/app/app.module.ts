@@ -3,21 +3,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { CookieService } from 'ngx-cookie-service';
-import { NgModule } from '@angular/core';
 import { firebaseConfig } from '../assets/private'
+import { ChartsModule } from 'ng2-charts';
+import { NgModule } from '@angular/core';
 
 import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import { GraphComponent } from './graph/graph.component';
+import { AuthComponent } from './auth/auth.component';
 import { AppComponent } from './app.component';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database'
 import { AngularFireModule } from '@angular/fire'
-import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     RegisterComponent,
+    HeaderComponent,
     LoginComponent,
+    GraphComponent,
     AuthComponent,
     AppComponent,
   ],
@@ -28,6 +33,7 @@ import { AuthComponent } from './auth/auth.component';
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserModule,
+    ChartsModule,
     FormsModule,
   ],
   providers: [CookieService],

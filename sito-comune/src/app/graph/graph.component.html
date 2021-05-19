@@ -1,0 +1,39 @@
+<auth-header></auth-header>
+<div class="content">
+    <div class="title">Dati sui vaccinati</div>
+    <div class="row">
+        <div class="chart-wrapper">
+            <canvas baseChart 
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="chartOptions"
+            [plugins]="[]"
+            [legend]="true"
+            [chartType]="'bar'">
+          </canvas>
+        </div>
+        <div class="chart-wrapper">
+            <canvas baseChart 
+            [data]="pieChartData" 
+            [labels]="pieChartLabels" 
+            [chartType]="'pie'"
+            [options]="genderOptions"
+            [plugins]="[]"
+            [legend]="true"
+            [colors]="pieChartColors">
+          </canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="chart-wrapper">
+            <canvas baseChart 
+            [datasets]="dosiData"
+            [labels]="dosiLabels"
+            [options]="dosiOptions"
+            [plugins]="[]"
+            [legend]="true"
+            [chartType]="'bar'">
+          </canvas>
+        </div>
+    </div>
+</div>

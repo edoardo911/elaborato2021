@@ -2,24 +2,26 @@
 
 *
 {
+    color: #FFF;
     font-family: 'Roboto Condensed', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 div.container
 {
-    background-image: linear-gradient(to right, #f51d0c, #ea7011, #df9d3f, #d8c077, #dcdcb5);
+    background-image: linear-gradient(to right bottom, #0b1b6d, #003a8e, #005aad, #007aca, #039be5);
     min-width: 500px;
-    width: 55%;
+    width: 50%;
     max-height: 650px;
     margin: auto;
     margin-top: 50vh;
+    padding: 10px 0 10px 0;
     border-radius: 10px;
     transform: translateY(-50%);
     box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-div.block { width: 60%; padding-top: 15px; }
+div.block { width: 70%; padding-top: 15px; }
 
 input
 {
@@ -58,14 +60,14 @@ input:focus + label, input:valid + label
     font-size: 10px;
 }
 
-input:focus:not(.error) { border-color: rgb(143, 43, 26); }
+input:focus:not(.error) { border-color: yellow; }
 .error { border-color: #FF0000; }
 
 button
 {
     outline: none;
     background: transparent;
-    width: 60%;
+    width: 70%;
     font-size: 16px;
     padding: 5px;
     border: solid;
@@ -77,8 +79,8 @@ button
 button:hover
 {
     cursor: pointer;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border-color: transparent;
 }
 
@@ -91,14 +93,14 @@ span.redirect
 span a
 {
     text-decoration: none;
-    color: #646602;
+    color: yellow;
     transition: 0.3s;
 }
 
 span a:hover
 {
     text-decoration: underline;
-    color: #662f02;
+    color: sandybrown;
 }
 
 form
@@ -127,4 +129,215 @@ form
     margin: auto;
     margin-top: 50vh;
     transform: translateY(-50%);
+}
+
+header
+{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #0b1b6d, #003a8e, #005aad, #007aca, #039be5);
+    width: 100%;
+    height: 60px;
+}
+
+div.headerDiv span
+{
+    position: relative;
+    top: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 26px;
+}
+
+div.headerDiv
+{
+    display: inline-block;
+    padding: 0 10px 0 10px;
+    height: 100%;
+    transition: 0.2s;
+}
+
+div.user
+{
+    display: flex;
+    align-items: center;
+    flex-flow: row;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 70%;
+    padding: 10px;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+div.user:hover
+{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+div.user .user-name
+{
+    color: white;
+    font-size: 44px;
+    padding-left: 10px;
+}
+
+div.user .user-cf
+{
+    color: gray;
+    font-size: 18px;
+    padding-left: 12px;
+    transition: 0.3s;
+}
+
+div.svg
+{
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+svg.arrow
+{
+    width: 50px;
+    height: 50px;
+    transition: 0.2s;
+}
+
+rect
+{
+    fill: rgb(120, 120, 120);
+    width: 30px;
+    height: 5px;
+    transition: 0.2s;
+}
+
+div.userMenu
+{
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 70%;
+    padding: 10px;
+    margin: auto;
+    font-size: 24px;
+    border-radius: 0 0 5px 5px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+}
+
+svg.hamburger
+{
+    display: none;
+    width: 50px;
+    height: 50px;
+    margin-left: 5px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+svg.hamburger:hover
+{
+    background-color: rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+
+div.hamburger-menu
+{
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    display: none !important;
+    position: fixed;
+    top: 60px;
+    left: 0;
+}
+
+div.hamburger-menu div.item
+{
+    background-image: linear-gradient(to right, #0b1b6d, #003a8e, #005aad, #007aca, #039be5);
+    width: 100vw;
+    padding: 10px 0 10px 0;
+    font-size: 25px;
+}
+
+div.hamburger-menu div.item span { margin-left: 10px; }
+svg.hamburger rect { fill: white; }
+rect#top { transform-origin: 20% 30%; }
+rect#bottom { transform-origin: 20% 70%; }
+
+div.userMenu span { margin: 6px 0 6px 0; }
+div.userMenu span.gender { font-size: 54px; }
+div.user:hover rect, div.user:hover .user-cf { color: rgb(100, 100, 100); fill: rgb(100, 100, 100); }
+
+rect#r1 { transform: rotate(45deg); }
+rect#r2 { transform: rotate(-45deg); }
+div.headerItems { overflow-y: hidden; height: 100%; }
+div.headerDiv:hover, .active, div.hamburger-menu div.item:hover { background-color: rgba(0, 0, 0, 0.3); }
+div.headerDiv:hover { cursor: pointer; }
+div.content { margin-top: 75px; }
+
+header img
+{
+    height: 45px;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 760px)
+{
+    header img
+    {
+        height: 45px;
+        transform: translateX(0);
+        margin-right: 5px;
+    }
+
+    svg.hamburger, div.hamburger-menu { display: block !important; }
+    div.userMenu span.gender { font-size: 42px; }
+    div.userMenu { font-size: 16px; text-align: center; }
+    div.user .user-name { font-size: 32px; }
+    div.user .user-cf { font-size: 16px; }
+    div.svg, div.headerItems { display: none; }
+}
+
+@media only screen and (max-width: 500px),
+       only screen and (max-height: 500px)
+{
+    body { overflow-y: auto; }
+
+    div.container
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        flex-flow: column;
+        justify-content: center;
+        min-width: 100%;
+        width: 100%;
+        min-height: 100vh;
+        max-height: unset;
+        height: unset;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        transform: none;
+        box-shadow: none;
+    }
 }
