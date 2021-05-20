@@ -9,4 +9,11 @@
     <string name="account">Non hai un account? Clicca</string>
     <string name="qui">qui</string>
     <string name="nonAuth">Questo utente non è autorizzato, passa la tessera sul lettore NFC per diventare amministratore</string>
+    <string name="nfc">Entra con NFC</string>
+    <string name="auth">Autentica il tuo account</string>
+    <string name="int_all">Intolleranze/Allergie</string>
+    <string name="disclaimer">Attenzione! Se non sei sicuro, puoi chiedere aiuto ad un esperto</string>
+    <string name="ana">Anafilassi</string>
+    <string name="asma">Asma</string>
+    <string name="masto">Mastocitosi</string>
 </resources>

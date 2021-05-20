@@ -56,45 +56,42 @@ public class LoginFragment extends Fragment
             else
             {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task)
+                db.collection("users").get().addOnCompleteListener(task -> {
+                    boolean logged = false;
+                    for(QueryDocumentSnapshot doc: task.getResult())
                     {
-                        boolean logged = false;
-                        for(QueryDocumentSnapshot doc: task.getResult())
+                        if(doc.getData().get("email").equals(email.getText().toString())
+                                || doc.getData().get("pwd").equals(pwd.getText().toString()))
                         {
-                            if(doc.getData().get("email").equals(email.getText().toString())
-                                    || doc.getData().get("pwd").equals(pwd.getText().toString()))
-                            {
-                                logged = true;
-                                MainActivity.auth = (boolean) doc.getData().get("auth");
-                                break;
-                            }
+                            logged = true;
+                            MainActivity.auth = (boolean) doc.getData().get("auth");
+                            break;
                         }
+                    }
 
-                        if(logged)
+                    if(logged)
+                    {
+                        AuthFragment.email = email.getText().toString();
+                        NavController nav = Navigation.findNavController(view);
+                        nav.navigate(R.id.action_login_fragment_to_auth_fragment);
+                    }
+                    else
+                    {
+                        TextView error = view.findViewById(R.id.error);
+                        error.setVisibility(View.VISIBLE);
+                        Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
+                        fadeout.setAnimationListener(new Animation.AnimationListener()
                         {
-                            NavController nav = Navigation.findNavController(view);
-                            nav.navigate(R.id.action_login_fragment_to_auth_fragment);
-                        }
-                        else
-                        {
-                            TextView error = view.findViewById(R.id.error);
-                            error.setVisibility(View.VISIBLE);
-                            Animation fadeout = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
-                            fadeout.setAnimationListener(new Animation.AnimationListener()
-                            {
-                                @Override
-                                public void onAnimationStart(Animation animation) {}
+                            @Override
+                            public void onAnimationStart(Animation animation) {}
 
-                                @Override
-                                public void onAnimationEnd(Animation animation) { error.setVisibility(View.GONE); }
+                            @Override
+                            public void onAnimationEnd(Animation animation) { error.setVisibility(View.GONE); }
 
-                                @Override
-                                public void onAnimationRepeat(Animation animation) {}
-                            });
-                            error.startAnimation(fadeout);
-                        }
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {}
+                        });
+                        error.startAnimation(fadeout);
                     }
                 });
             }

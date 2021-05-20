@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_nfc_fragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_nfc_fragment_to_choose_fragment"
+            app:destination="@id/choose_fragment" />
     </fragment>
 
     <fragment
@@ -37,4 +40,9 @@
         android:id="@+id/auth_fragment"
         android:name="it.main.AuthFragment"
         android:label="AuthFragment" />
+
+    <fragment
+        android:id="@+id/choose_fragment"
+        android:name="it.main.ChooseFragment"
+        android:label="ChooseFragment" />
 </navigation>
