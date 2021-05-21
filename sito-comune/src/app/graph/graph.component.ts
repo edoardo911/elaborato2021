@@ -67,12 +67,18 @@ export class GraphComponent
         { data: [], label: 'Nessuna dose', backgroundColor: "#FF0055", hoverBackgroundColor: "#AA0033" },
         { data: [], label: 'Prima dose', backgroundColor: "#4434F5", hoverBackgroundColor: "#2212A3" },
         { data: [], label: 'Entrambe le dosi', backgroundColor: "#DE8F44", hoverBackgroundColor: "#995A11" },
+        { data: [], label: 'Johnson & Johnson', backgroundColor: "#7F30E6", hoverBackgroundColor: "#5A1093" },
     ];
 
     constructor(router:Router, cs:CookieService, private firestore:AngularFirestore)
     {
-        if(cs.get("email") == "" || cs.get("auth") == "false") 
+        if(cs.get("email") == "")
             router.navigateByUrl("/login")
+        firestore.collection("users", ref => ref.where("email", "==", cs.get("email"))).get().subscribe(data => {
+            if(!data.docs[0].data()["auth"])
+                router.navigateByUrl("/login")
+        });
+
         this.firestore.collection("vaccinati").get().subscribe(data => {
             let mappaEta = new Map<number, number>();
             let tot = 0;
@@ -82,6 +88,7 @@ export class GraphComponent
             let noDose = 0;
             let dose1 = 0;
             let dose2 = 0;
+            let jj = 0;
             data.forEach(value => {
                 if(value.data()["vaccino"] != "")
                 {
@@ -99,7 +106,9 @@ export class GraphComponent
                         totA++;
                     tot++;
 
-                    if(this.fattoVaccino(value.data()["dataVaccino1"]))
+                    if(value.data()["vaccino"] == "J&J")
+                        jj++;
+                    else if(this.fattoVaccino(value.data()["dataVaccino1"]))
                     {
                         if(this.fattoVaccino(value.data()["dataVaccino2"]))
                             dose2++;
@@ -120,6 +129,7 @@ export class GraphComponent
             this.dosiData[0].data.push(noDose);
             this.dosiData[1].data.push(dose1);
             this.dosiData[2].data.push(dose2);
+            this.dosiData[3].data.push(jj);
         });
     }
 

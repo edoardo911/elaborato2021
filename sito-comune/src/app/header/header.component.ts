@@ -62,7 +62,6 @@ export class HeaderComponent
     public logout():void
     {
         this.cs.delete("email");
-        this.cs.delete("auth");
         this.router.navigateByUrl("/login");
     }
 

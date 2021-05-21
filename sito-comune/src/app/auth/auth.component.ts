@@ -62,7 +62,9 @@ export class AuthComponent
     {
         if(cs.get("email") == "")
             router.navigateByUrl("/login");
-        this.auth = cs.get("auth") == "true";
+        firestore.collection("users", ref => ref.where("email", "==", cs.get("email"))).get().subscribe(data => {
+            this.auth = data.docs[0].data()["auth"];
+        });
 
         firestore.collection("vaccinati").get().subscribe(data => {
             data.forEach(value => {

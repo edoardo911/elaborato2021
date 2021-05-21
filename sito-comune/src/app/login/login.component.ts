@@ -66,7 +66,6 @@ export class LoginComponent
 
                 if(logged)
                 {
-                    this.cs.set("auth", auth, 1);
                     this.cs.set("email", email, 2);
                     this.router.navigateByUrl("/");
                 }

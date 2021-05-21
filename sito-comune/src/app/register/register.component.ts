@@ -90,7 +90,6 @@ export class RegisterComponent
                 if(!emailTaken)
                 {
                     this.firestore.collection("users").add({ email: email, pwd: pwd, auth: false });
-                    this.cs.set("auth", "false", 1);
                     this.cs.set("email", email, 2);
                     this.router.navigateByUrl("/");
                 }
