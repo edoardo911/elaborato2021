@@ -3,7 +3,10 @@ package it.main;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -29,15 +32,26 @@ public class MainActivity extends AppCompatActivity
 
         intent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         adapter = NfcAdapter.getDefaultAdapter(this);
+
+        IntentFilter filter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent)
+            {
+                enableNFC();
+            }
+        };
+        registerReceiver(receiver, filter);
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        if(adapter != null && adapter.isEnabled())
-            adapter.enableForegroundDispatch(this, intent, null, null);
+        enableNFC();
     }
+
+    private void enableNFC() { if(adapter != null && adapter.isEnabled()) adapter.enableForegroundDispatch(this, intent, null, null); }
 
     @Override
     protected void onPause()

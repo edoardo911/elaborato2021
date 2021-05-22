@@ -61,32 +61,9 @@ public class NFCFragment extends Fragment
             Snackbar.make(view, text, BaseTransientBottomBar.LENGTH_LONG).show();
     }
 
-    /*
-        {
-            "eta": 45,
-            "anafilassi": false,
-            "asma": false,
-            "mastocitosi": false,
-            "polisorbati": false,
-            "conservanti": false,
-            "saccarosio": false,
-            "agrumi": false,
-            "polietilenico": false,
-            "trometamina": false,
-
-            "orticaria": false,
-            "colite_ulcerosa": false,
-            "insf_renale": false,
-
-            "gravidanza": false,
-            "tempo_grav": 5 //espresso in mesi, presente solo se gravidanza è true (finisce a 9)
-            "allattamento": false,
-            "tempo_allatt": 3 //espresso in mesi, presente solo se allattamento è true (finisce a 6)
-        }
-     */
     public static void elaborate(String content)
     {
-        String[] data = content.split("&");
+        ChooseFragment.data = content.split("&");
         NavController nav = Navigation.findNavController(globalView);
         nav.navigate(R.id.action_nfc_fragment_to_choose_fragment);
     }

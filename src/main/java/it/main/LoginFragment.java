@@ -61,7 +61,7 @@ public class LoginFragment extends Fragment
                     for(QueryDocumentSnapshot doc: task.getResult())
                     {
                         if(doc.getData().get("email").equals(email.getText().toString())
-                                || doc.getData().get("pwd").equals(pwd.getText().toString()))
+                                && doc.getData().get("pwd").equals(pwd.getText().toString()))
                         {
                             logged = true;
                             MainActivity.auth = (boolean) doc.getData().get("auth");

@@ -106,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/qui"
-                    android:textColor="@color/link"
+                    android:textColor="?colorSecondary"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -117,10 +117,11 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/custom_button"
+                android:background="@drawable/button"
                 android:text="@string/login"
-                android:textColor="@android:color/secondary_text_dark"
-                app:backgroundTint="@android:color/secondary_text_dark"
+                android:textColor="@color/custom_button_text"
+                app:backgroundTint="@android:color/transparent"
+                app:backgroundTintMode="add"
                 app:iconPadding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

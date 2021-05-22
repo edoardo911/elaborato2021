@@ -16,4 +16,21 @@
     <string name="ana">Anafilassi</string>
     <string name="asma">Asma</string>
     <string name="masto">Mastocitosi</string>
+    <string name="poli">Polisorbati</string>
+    <string name="cons">Conservanti</string>
+    <string name="sacc">Saccarosio</string>
+    <string name="agrumi">Agrumi</string>
+    <string name="poliet">Polietilenico</string>
+    <string name="trom">Trometamina</string>
+    <string name="cond">Condizioni Fisiche</string>
+    <string name="ort">Orticaria</string>
+    <string name="col_ul">Colite-Ulcerosa</string>
+    <string name="ins_ren">Insufficienza Renale</string>
+    <string name="maternita">Maternità</string>
+    <string name="grav">Gravidanza</string>
+    <string name="inzio_g">Inizio Gravidanza</string>
+    <string name="all">Allattamento</string>
+    <string name="inzio_a">Inizio Allattamento</string>
+    <string name="confirm">Conferma</string>
+    <string name="date_format">dd/MM/yyyy</string>
 </resources>

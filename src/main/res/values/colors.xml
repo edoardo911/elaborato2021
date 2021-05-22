@@ -11,5 +11,12 @@
     <color name="error">#FFFF0000</color>
     <color name="link">#06AF9F</color>
     <color name="warning">#FFC107</color>
+    <color name="yellow">#FFC800</color>
+    <color name="dark_yellow">#D8AC0A</color>
     <color name="error_bg">#FF8585</color>
+    <color name="gray">#B1B1B1</color>
+    <color name="bar_color">#003a8e</color>
+    <color name="bar_color_variant">#005aad</color>
+    <color name="bg">#007aca</color>
+    <color name="very_bright_bar">#039be5</color>
 </resources>
