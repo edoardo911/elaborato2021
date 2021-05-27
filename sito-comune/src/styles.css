@@ -4,8 +4,9 @@
 {
     color: #FFF;
     font-family: 'Roboto Condensed', sans-serif;
-    overflow-x: hidden;
 }
+
+body { overflow-y: hidden; }
 
 div.container
 {
@@ -300,6 +301,8 @@ header img
 
 @media only screen and (max-width: 760px)
 {
+    body { overflow-y: auto; }
+
     header img
     {
         height: 45px;
