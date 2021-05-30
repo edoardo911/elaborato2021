@@ -1,0 +1,23 @@
+{
+  "nome": "Uomo",
+  "cognome": "D'Acciaio",
+  "email": "Uomo.DAcciaio@bix-swissbank.com",
+  "eta": 80,
+
+  "anafilassi": false, 
+  "asma": false,        
+  "mastocitosi": false, 
+  "polisorbati": false,
+  "conservanti": false,
+  "saccarosio": false,
+  "diabete": false,
+  "agrumi": false, 
+  "polietilenico": false, 
+  "trometamina": false, 
+  "orticaria": false, 
+  "colite_ulcerosa": false, 
+  "insf_renale": false, 
+  
+  "gravidanza": false,
+  "allattamento": false
+}

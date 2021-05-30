@@ -1,0 +1,98 @@
+body {
+  width: 272.2mm;
+  height: 385.7mm;
+  padding: 0;
+  margin: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 24px;  
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header, .body, .footer {
+  margin: 30px;
+}
+
+/*HEADER*/
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 2;
+  align-items: center;
+  height: 300px;
+  margin-top: -50px;
+  margin-left: 70px;
+  font-size: 24px;
+}
+
+.logo {
+  width: 250px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.sub-header {
+  display: flex;
+  flex-direction: column;
+  margin-left: 35px;
+}
+
+/*BODY*/
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 3;
+
+  margin-top: -130px;
+  margin-right: 70px;
+  margin-left: 70px;
+}
+
+.vaccine {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.vaccine-1, .vaccine-2 {
+  background-color: rgba(255, 251, 0, 0.267);
+  padding-left: 25px;
+  margin-top: -70px;
+  width: 45%;
+}
+
+.data, .vaccine {
+  padding: 0;
+  margin: 0;  
+}
+
+.notes {
+  margin-top: -80px;
+}
+
+.notes ul li {
+  margin-bottom: 25px;
+}
+
+/*FOOTER*/
+
+.footer {
+  
+  text-align: center;
+  margin-bottom: 10px;
+}
