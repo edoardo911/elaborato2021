@@ -142,6 +142,8 @@ def set_data(data, dose):
            
           if next_time not in date_vac[data][min_lobby] and next_time != '20:00':
             set_dict(data, min_lobby, next_time, user['email'], dose)
+            sorted_items = sorted(date_vac[data][min_lobby].items())
+            date_vac[data][min_lobby] = dict(sorted_items)
             return [data, next_time, min_lobby]
 
           elif next_time == '20:00':
