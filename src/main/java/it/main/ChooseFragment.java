@@ -101,7 +101,7 @@ public class ChooseFragment extends Fragment
     {
         String todaysDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         int year = Integer.parseInt(todaysDate.split("/")[2]) - Integer.parseInt(date.split("/")[2]);
-        if((Integer.parseInt(todaysDate.split("/")[1]) * 31) + Integer.parseInt(todaysDate.split("/")[0]) >
+        if((Integer.parseInt(todaysDate.split("/")[1]) * 31) + Integer.parseInt(todaysDate.split("/")[0]) <
                 (Integer.parseInt(date.split("/")[1]) * 31) + Integer.parseInt(date.split("/")[0]))
             return year - 1;
         return year;
