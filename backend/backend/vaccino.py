@@ -252,6 +252,7 @@ def elaborate(userData):
 
   # ricerca vaccino ottimale
   global note
+  global vaccino
   vaccino_dict, note = get_vaccino()
   if max(vaccino_dict.values()):
     vaccino = max(vaccino_dict, key=vaccino_dict.get) # vaccino risultante dalla mini-analisi statistica
