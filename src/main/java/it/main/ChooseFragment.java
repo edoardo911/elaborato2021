@@ -9,6 +9,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -16,11 +18,17 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ChooseFragment extends Fragment
 {
     public static String[] data;
+    private static EditText email;
+
+    private static ChooseFragment instance;
 
     public ChooseFragment() { super(R.layout.choose_fragment); }
 
@@ -29,6 +37,7 @@ public class ChooseFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
         MainActivity.scene = -1;
+        instance = this;
 
         String dateReg = "^([0-3]\\d{1})\\/((0|1|2)\\d{1})\\/((19|20)\\d{2})";
         String emailReg = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
@@ -49,7 +58,7 @@ public class ChooseFragment extends Fragment
 
         Button confirm = view.findViewById(R.id.confirm);
         confirm.setOnClickListener(v -> {
-            EditText email = view.findViewById(R.id.email_choose);
+            email = view.findViewById(R.id.email_choose);
             if((grav.isEnabled() && !grav.getText().toString().matches(dateReg)))
                 grav.requestFocus();
             else if((all.isEnabled() && !all.getText().toString().matches(dateReg)))
@@ -61,6 +70,8 @@ public class ChooseFragment extends Fragment
                 JSONObject obj = new JSONObject();
                 try
                 {
+                    obj.put("nome", data[7]);
+                    obj.put("cognome", data[2]);
                     obj.put("eta", getEta(data[3]));
                     obj.put("email", email.getText().toString());
                     obj.put("anafilassi", ((CheckBox) view.findViewById(R.id.anafilassi)).isChecked());
@@ -69,32 +80,36 @@ public class ChooseFragment extends Fragment
                     obj.put("polisorbati", ((CheckBox) view.findViewById(R.id.polisorbati)).isChecked());
                     obj.put("conservanti", ((CheckBox) view.findViewById(R.id.conservanti)).isChecked());
                     obj.put("saccarosio", ((CheckBox) view.findViewById(R.id.saccarosio)).isChecked());
+                    obj.put("diabete", ((CheckBox) view.findViewById(R.id.diabete)).isChecked());
                     obj.put("agrumi", ((CheckBox) view.findViewById(R.id.agrumi)).isChecked());
                     obj.put("polietilenico", ((CheckBox) view.findViewById(R.id.polietilenico)).isChecked());
                     obj.put("trometamina", ((CheckBox) view.findViewById(R.id.trometamina)).isChecked());
                     obj.put("orticaria", ((CheckBox) view.findViewById(R.id.orticaria)).isChecked());
                     obj.put("colite_ulcerosa", ((CheckBox) view.findViewById(R.id.col_ul)).isChecked());
                     obj.put("insf_renale", ((CheckBox) view.findViewById(R.id.ins_ren)).isChecked());
-                    if(gravidanza.isChecked())
-                        obj.put("tempo_grav", grav.getText().toString());
-                    if(allattamento.isChecked())
-                        obj.put("tempo_allatt", all.getText().toString());
-                } catch (JSONException | ParseException e) { e.printStackTrace(); }
-                new PostData().execute(obj.toString());
+                    obj.put("gravidanza", gravidanza.isChecked() ? grav.getText().toString() : false);
+                    obj.put("allattamento", allattamento.isChecked() ? all.getText().toString() : false);
+                } catch (JSONException e) { e.printStackTrace(); }
+                new PostData().execute(obj);
             }
         });
     }
 
-    private int getEta(String date) throws ParseException
+    public static void focusEmail() { email.requestFocus(); }
+
+    private int getEta(String date)
     {
-        GregorianCalendar userDate = new GregorianCalendar();
-        userDate.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(date));
-        float diff = (new GregorianCalendar().getTimeInMillis() - userDate.getTimeInMillis());
-        diff /= 1000;
-        diff /= 60;
-        diff /= 60;
-        diff /= 24;
-        diff /= 364.75;
-        return (int) diff;
+        String todaysDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        int year = Integer.parseInt(todaysDate.split("/")[2]) - Integer.parseInt(date.split("/")[2]);
+        if((Integer.parseInt(todaysDate.split("/")[1]) * 31) + Integer.parseInt(todaysDate.split("/")[0]) >
+                (Integer.parseInt(date.split("/")[1]) * 31) + Integer.parseInt(date.split("/")[0]))
+            return year - 1;
+        return year;
+    }
+
+    public static void userHasBooked()
+    {
+        NavController nav = Navigation.findNavController(instance.getView());
+        nav.navigate(R.id.action_choose_fragment_to_booked_fragment);
     }
 }

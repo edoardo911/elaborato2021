@@ -1,6 +1,8 @@
 package it.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -13,6 +15,10 @@ import android.nfc.Tag;
 import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.widget.Button;
+
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.UnsupportedEncodingException;
 
@@ -30,16 +36,26 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(getIntent().getAction().equals("spid_intent"))
+            RegisterFragment.startSpid();
+        else if(getIntent().getAction().equals("nfc_intent"))
+        {
+            NavController nav = Navigation.findNavController(findViewById(R.id.all));
+            nav.navigate(R.id.action_registerFragment_to_nfc_fragment);
+        }
+        else if(getIntent().getAction().equals("auth_intent"))
+        {
+            NavController nav = Navigation.findNavController(findViewById(R.id.all));
+            nav.navigate(R.id.action_registerFragment_to_login_fragment);
+        }
+
         intent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         adapter = NfcAdapter.getDefaultAdapter(this);
 
         IntentFilter filter = new IntentFilter("android.nfc.action.ADAPTER_STATE_CHANGED");
         BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
-            public void onReceive(Context context, Intent intent)
-            {
-                enableNFC();
-            }
+            public void onReceive(Context context, Intent intent) { enableNFC(); }
         };
         registerReceiver(receiver, filter);
     }

@@ -1,0 +1,44 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="spid"
+        android:enabled="true"
+        android:icon="@mipmap/spid"
+        android:shortcutShortLabel="@string/shortcut_label3"
+        android:shortcutLongLabel="@string/shortcut_label3"
+        android:shortcutDisabledMessage="@string/shortcut_label3">
+        <intent
+            android:action="spid_intent"
+            android:targetPackage="it.main"
+            android:targetClass="it.main.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="nfc"
+        android:enabled="true"
+        android:icon="@mipmap/nfc"
+        android:shortcutShortLabel="@string/shortcut_label1"
+        android:shortcutLongLabel="@string/shortcut_label1"
+        android:shortcutDisabledMessage="@string/shortcut_label1">
+        <intent
+            android:action="nfc_intent"
+            android:targetPackage="it.main"
+            android:targetClass="it.main.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="auth"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:shortcutShortLabel="@string/shortcut_label2"
+        android:shortcutLongLabel="@string/shortcut_label2"
+        android:shortcutDisabledMessage="@string/shortcut_label2">
+        <intent
+            android:action="auth_intent"
+            android:targetPackage="it.main"
+            android:targetClass="it.main.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+        <capability-binding android:key="actions.intent.CREATE_MESSAGE" />
+    </shortcut>
+</shortcuts>

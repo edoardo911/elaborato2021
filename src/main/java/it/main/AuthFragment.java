@@ -61,21 +61,24 @@ public class AuthFragment extends Fragment
     public static void elaborate(String tag, FragmentActivity a)
     {
         String data[] = tag.split("&");
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("comuni").whereEqualTo("nome", "Agrigento").get().addOnCompleteListener(task -> {
-            DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-            for(String s: (ArrayList<String>) doc.getData().get("auth"))
-            {
-                if(s.equals(data[1]))
+        if(data.length == 10)
+        {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("comuni").whereEqualTo("nome", "Agrigento").get().addOnCompleteListener(task -> {
+                DocumentSnapshot doc = task.getResult().getDocuments().get(0);
+                for(String s: (ArrayList<String>) doc.getData().get("auth"))
                 {
-                    db.collection("users").whereEqualTo("email", email).get().addOnCompleteListener(task1 -> {
-                        task1.getResult().getDocuments().get(0).getReference().update("auth", true);
-                    });
-                    MainActivity.auth = true;
-                    setAdmin(a);
-                    break;
+                    if(s.equals(data[1]))
+                    {
+                        db.collection("users").whereEqualTo("email", email).get().addOnCompleteListener(task1 -> {
+                            task1.getResult().getDocuments().get(0).getReference().update("auth", true);
+                        });
+                        MainActivity.auth = true;
+                        setAdmin(a);
+                        break;
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }

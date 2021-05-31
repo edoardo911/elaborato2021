@@ -63,8 +63,11 @@ public class NFCFragment extends Fragment
 
     public static void elaborate(String content)
     {
-        ChooseFragment.data = content.split("&");
-        NavController nav = Navigation.findNavController(globalView);
-        nav.navigate(R.id.action_nfc_fragment_to_choose_fragment);
+        if(content.split("&").length == 10)
+        {
+            ChooseFragment.data = content.split("&");
+            NavController nav = Navigation.findNavController(globalView);
+            nav.navigate(R.id.action_nfc_fragment_to_choose_fragment);
+        }
     }
 }

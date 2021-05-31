@@ -241,6 +241,33 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearLayout19"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/option_bg"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout8">
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/diabete"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <CheckBox
+                    android:id="@+id/diabete"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/linearLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -249,7 +276,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+                app:layout_constraintTop_toBottomOf="@id/linearLayout19">
 
                 <TextView
                     android:id="@+id/textView12"

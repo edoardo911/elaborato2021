@@ -23,6 +23,8 @@ import it.inps.spid.utils.*;
 
 public class RegisterFragment extends Fragment
 {
+    private static RegisterFragment instance;
+
     ActivityResultLauncher launcher = registerForActivityResult(new IdentityProviderSelectorActivityContract(), result -> {
         if(result.getSpidEvent().equals(SpidEvent.GENERIC_ERROR))
             Toast.makeText(getContext(), "Generic Error", Toast.LENGTH_SHORT).show();
@@ -49,7 +51,11 @@ public class RegisterFragment extends Fragment
         else Toast.makeText(getContext(), result.toString(), Toast.LENGTH_SHORT).show();
     });
 
-    public RegisterFragment() { super(R.layout.register_fragment); }
+    public RegisterFragment()
+    {
+        super(R.layout.register_fragment);
+        this.instance = this;
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
@@ -57,13 +63,7 @@ public class RegisterFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         MainActivity.scene = -1;
         Button button = view.findViewById(R.id.button);
-        button.setOnClickListener((View v) -> {
-              SpidParams.Config params = new SpidParams.Config("https://vaccinationdata.duckdns.org:8088/", "https://vaccinationdata.duckdns.org:8088/", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
-              IdentityProvider.Builder prov = new IdentityProvider.Builder()
-                      .addCustomIdentityProvider("asd", R.drawable.ic_spid_idp_posteid, "https://vaccinationdata.duckdns.org:8088/");
-              SpidParams p = new SpidParams(params, prov.build());
-              launcher.launch(p);
-        });
+        button.setOnClickListener((View v) -> { startSpid(); });
 
         NavController nav = Navigation.findNavController(view);
         button = view.findViewById(R.id.button2);
@@ -75,5 +75,14 @@ public class RegisterFragment extends Fragment
         button.setOnClickListener(v -> {
             nav.navigate(R.id.action_registerFragment_to_login_fragment);
         });
+    }
+
+    public static void startSpid()
+    {
+        SpidParams.Config params = new SpidParams.Config("https://vaccinationdata.duckdns.org:8088/", "https://vaccinationdata.duckdns.org:8088/", 60, "https://www.spid.gov.it/", "https://www.spid.gov.it/richiedi-spid");
+        IdentityProvider.Builder prov = new IdentityProvider.Builder()
+                .addCustomIdentityProvider("asd", R.drawable.ic_spid_idp_posteid, "https://vaccinationdata.duckdns.org:8088/");
+        SpidParams p = new SpidParams(params, prov.build());
+        instance.launcher.launch(p);
     }
 }

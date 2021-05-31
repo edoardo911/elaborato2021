@@ -47,5 +47,14 @@
     <fragment
         android:id="@+id/choose_fragment"
         android:name="it.main.ChooseFragment"
-        android:label="ChooseFragment" />
+        android:label="ChooseFragment" >
+        <action
+            android:id="@+id/action_choose_fragment_to_booked_fragment"
+            app:destination="@id/booked_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/booked_fragment"
+        android:name="it.main.BookedFragment"
+        android:label="BookedFragment" />
 </navigation>

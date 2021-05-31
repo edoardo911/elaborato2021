@@ -33,4 +33,9 @@
     <string name="inzio_a">Inizio Allattamento</string>
     <string name="confirm">Conferma</string>
     <string name="date_format">dd/MM/yyyy</string>
+    <string name="shortcut_label1">Login NFC</string>
+    <string name="shortcut_label2">Autorizza</string>
+    <string name="shortcut_label3">Login SPID</string>
+    <string name="diabete">Diabete</string>
+    <string name="booking">La sua richiesta è stata ricevuta, a breve le manderemo una mail</string>
 </resources>
