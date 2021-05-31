@@ -1,24 +1,26 @@
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
 from . import vaccino
-import sys
+import json
+import traceback
 
 @api_view(["POST"])
 def sendmail(request):
-    print(request.data['email'])
-    #json_val = vaccino.elaborate()
-    json_val = "Test del dio cane"
+    json_val = vaccino.elaborate(json.dumps(request.data))
     subject = 'Prenotazione Vaccino'
-    message = "<h1>Messaggio</h1>"
+    message = "<b>Gentile cittadino,</b><br>La ringraziamo per aver scelto il servizio di prenotazione vaccini del comune di Agrigento. In allegato troverà un resoconto della sua prenotaione:"
     to_email = [request.data['email']]
     from_email = settings.EMAIL_HOST_USER
     if to_email:
         try:
-            send_mail(subject, '', from_email, to_email, html_message=message)
+            mail = EmailMessage(subject, message, from_email, to_email)
+            mail.content_subtype = "html"
+            mail.attach_file("/home/vacc/backend/backend/pdf/prenotazione-vaccino.pdf", "application/pdf")
+            mail.send()
         except:
-            print(sys,sys.exc_info()[0])
+            traceback.print_exc()
             return Response(status=406)
         return Response(status=200, data=json_val)
     return Response(status=400)

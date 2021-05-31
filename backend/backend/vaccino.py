@@ -185,7 +185,7 @@ def create_pdf():
   }
 
   # read
-  with open('pdf/index.html', 'r') as file: 
+  with open('/home/vacc/backend/backend/pdf/index.html', 'r') as file: 
     html = file.read()
 
   html = html.replace('IN:NOME', user['nome'])
@@ -225,10 +225,10 @@ def create_pdf():
     html = html.replace('IN:NOTE', s + '</ul>')
 
   # write
-  with open('pdf/pdf.html', 'w') as file: 
+  with open('/home/vacc/backend/backend/pdf/pdf.html', 'w') as file: 
     file.write(html)
 
-  pdfkit.from_file('pdf/pdf.html', 'pdf/out.pdf', options=options)
+  pdfkit.from_file('/home/vacc/backend/backend/pdf/pdf.html', '/home/vacc/backend/backend/pdf/prenotazione-vaccino.pdf', options=options)
 
 
 # main
@@ -241,13 +241,12 @@ data_2      = False
 ora_2       = False
 sala_2      = False
 
-def elaborate():
+def elaborate(userData):
   # lettura dei file
-  with open('user.json', 'r') as file: 
-    global user
-    user = json.load(file)
+  global user
+  user = json.loads(userData)
 
-  with open('date.json', 'r') as file:
+  with open('/home/vacc/backend/backend/date.json', 'r') as file:
     global date_vac
     date_vac = json.load(file)
 
@@ -272,7 +271,7 @@ def elaborate():
   if vaccino:
     get_date(vaccino)
   # scrittura su date.json
-  with open('date.json', 'w') as file:
+  with open('/home/vacc/backend/backend/date.json', 'w') as file:
     json.dump(date_vac, file, indent=2)
 
   # creazione pdf
@@ -284,7 +283,4 @@ def elaborate():
     final_json  = {"dataVaccino1":data_1, "dataVaccino2":data_2, "vaccino": nome_vaccino}
   else:
     final_json  = {"dataVaccino1":"", "dataVaccino2":"", "vaccino": nome_vaccino}
-
-  final_json = str(final_json)
-  final_json = final_json.replace('\'', '\"')
-  return final_json
+  return str(final_json)
