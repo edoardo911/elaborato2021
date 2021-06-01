@@ -106,7 +106,7 @@ export class GraphComponent
                         totA++;
                     tot++;
 
-                    if(value.data()["vaccino"] == "J&J")
+                    if(value.data()["vaccino"] == "J&J" && this.fattoVaccino(value.data()["dataVaccino1"]))
                         jj++;
                     else if(this.fattoVaccino(value.data()["dataVaccino1"]))
                     {
