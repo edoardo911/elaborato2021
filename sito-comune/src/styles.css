@@ -4,21 +4,21 @@
 {
     color: #FFF;
     font-family: 'Roboto Condensed', sans-serif;
+    overflow-x: hidden;
 }
-
-body { overflow-y: hidden; }
 
 div.container
 {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
     background-image: linear-gradient(to right bottom, #0b1b6d, #003a8e, #005aad, #007aca, #039be5);
     min-width: 500px;
     width: 50%;
     max-height: 650px;
-    margin: auto;
-    margin-top: 50vh;
     padding: 10px 0 10px 0;
     border-radius: 10px;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     box-shadow: 5px 5px rgba(0, 0, 0, 0.2);
 }
 
