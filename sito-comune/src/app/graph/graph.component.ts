@@ -92,7 +92,7 @@ export class GraphComponent
             data.forEach(value => {
                 if(value.data()["vaccino"] != "")
                 {
-                    let eta = (new Date(Date.now()).getFullYear() as number) - (value.data()["dataNascita"].split("/")[2] as number);
+                    let eta = value.data()["eta"];
                     if(!mappaEta.has(eta))
                         mappaEta.set(eta, 1);
                     else
