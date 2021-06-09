@@ -38,4 +38,5 @@
     <string name="shortcut_label3">Login SPID</string>
     <string name="diabete">Diabete</string>
     <string name="booking">La sua richiesta è stata ricevuta, a breve le manderemo una mail</string>
+    <string name="already">Una richiesta a carico suo è già stata ricevuta, attenda l\'arrivo della mail</string>
 </resources>

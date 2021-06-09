@@ -51,10 +51,18 @@
         <action
             android:id="@+id/action_choose_fragment_to_booked_fragment"
             app:destination="@id/booked_fragment" />
+        <action
+            android:id="@+id/action_choose_fragment_to_alredy_fragment"
+            app:destination="@id/alredy_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/booked_fragment"
         android:name="it.main.BookedFragment"
         android:label="BookedFragment" />
+
+    <fragment
+        android:id="@+id/alredy_fragment"
+        android:name="it.main.AlreadyFragment"
+        android:label="AlreadyFragment" />
 </navigation>

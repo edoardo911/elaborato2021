@@ -20,6 +20,9 @@ import java.util.Map;
 
 public class PostData extends AsyncTask<JSONObject, Void, JSONObject>
 {
+    private ChooseFragment instance;
+    public PostData(ChooseFragment instance) { this.instance = instance; }
+
     @Override
     protected JSONObject doInBackground(JSONObject... objs)
     {
@@ -42,20 +45,21 @@ public class PostData extends AsyncTask<JSONObject, Void, JSONObject>
     protected void onPostExecute(JSONObject jsonObject)
     {
         if(jsonObject == null)
-            ChooseFragment.focusEmail();
+            instance.focusEmail();
         else
         {
             Map<String, Object> vaccinato = new HashMap<String, Object>();
-            vaccinato.put("cittaNascita", ChooseFragment.data[0]);
-            vaccinato.put("codiceFiscale", ChooseFragment.data[1]);
-            vaccinato.put("cognome", ChooseFragment.data[2]);
-            vaccinato.put("dataNascita", ChooseFragment.data[3]);
-            vaccinato.put("genere", ChooseFragment.data[4]);
-            vaccinato.put("indirizzo", ChooseFragment.data[5]);
-            vaccinato.put("nazioneNascita", ChooseFragment.data[6]);
-            vaccinato.put("nome", ChooseFragment.data[7]);
-            vaccinato.put("provincia", ChooseFragment.data[8]);
-            vaccinato.put("residenza", ChooseFragment.data[9]);
+            vaccinato.put("cittaNascita", instance.data[0]);
+            vaccinato.put("codiceFiscale", instance.data[1]);
+            vaccinato.put("cognome", instance.data[2]);
+            vaccinato.put("dataNascita", instance.data[3]);
+            vaccinato.put("eta", instance.getEta(instance.data[3]));
+            vaccinato.put("genere", instance.data[4]);
+            vaccinato.put("indirizzo", instance.data[5]);
+            vaccinato.put("nazioneNascita", instance.data[6]);
+            vaccinato.put("nome", instance.data[7]);
+            vaccinato.put("provincia", instance.data[8]);
+            vaccinato.put("residenza", instance.data[9]);
 
             try
             {
@@ -67,7 +71,7 @@ public class PostData extends AsyncTask<JSONObject, Void, JSONObject>
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("vaccinati").document().set(vaccinato);
 
-            ChooseFragment.userHasBooked();
+            instance.userHasBooked();
         }
     }
 }

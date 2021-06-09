@@ -35,6 +35,7 @@ import com.google.android.material.snackbar.Snackbar;
 
     Distanza tra prima e seconda dose:
     Pfizer: 21 giorni;
+
     Moderna: 28 giorni;
     AstraZeneca; 4-12 settimane;
     J&J: singola dose.

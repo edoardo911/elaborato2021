@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,8 @@ import java.util.GregorianCalendar;
 
 public class ChooseFragment extends Fragment
 {
+    private static boolean navigate = false;
+
     public static String[] data;
     private static EditText email;
 
@@ -67,37 +71,49 @@ public class ChooseFragment extends Fragment
                 email.requestFocus();
             else
             {
-                JSONObject obj = new JSONObject();
-                try
-                {
-                    obj.put("nome", data[7]);
-                    obj.put("cognome", data[2]);
-                    obj.put("eta", getEta(data[3]));
-                    obj.put("email", email.getText().toString());
-                    obj.put("anafilassi", ((CheckBox) view.findViewById(R.id.anafilassi)).isChecked());
-                    obj.put("asma", ((CheckBox) view.findViewById(R.id.asma)).isChecked());
-                    obj.put("mastocitosi", ((CheckBox) view.findViewById(R.id.mastocitosi)).isChecked());
-                    obj.put("polisorbati", ((CheckBox) view.findViewById(R.id.polisorbati)).isChecked());
-                    obj.put("conservanti", ((CheckBox) view.findViewById(R.id.conservanti)).isChecked());
-                    obj.put("saccarosio", ((CheckBox) view.findViewById(R.id.saccarosio)).isChecked());
-                    obj.put("diabete", ((CheckBox) view.findViewById(R.id.diabete)).isChecked());
-                    obj.put("agrumi", ((CheckBox) view.findViewById(R.id.agrumi)).isChecked());
-                    obj.put("polietilenico", ((CheckBox) view.findViewById(R.id.polietilenico)).isChecked());
-                    obj.put("trometamina", ((CheckBox) view.findViewById(R.id.trometamina)).isChecked());
-                    obj.put("orticaria", ((CheckBox) view.findViewById(R.id.orticaria)).isChecked());
-                    obj.put("colite_ulcerosa", ((CheckBox) view.findViewById(R.id.col_ul)).isChecked());
-                    obj.put("insf_renale", ((CheckBox) view.findViewById(R.id.ins_ren)).isChecked());
-                    obj.put("gravidanza", gravidanza.isChecked() ? grav.getText().toString() : false);
-                    obj.put("allattamento", allattamento.isChecked() ? all.getText().toString() : false);
-                } catch (JSONException e) { e.printStackTrace(); }
-                new PostData().execute(obj);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("vaccinati").whereEqualTo("codiceFiscale", data[1]).get().addOnCompleteListener(task -> {
+                    if(task.getResult().getDocuments().size() == 0)
+                    {
+                        JSONObject obj = new JSONObject();
+                        try
+                        {
+                            obj.put("nome", data[7]);
+                            obj.put("cognome", data[2]);
+                            obj.put("eta", getEta(data[3]));
+                            obj.put("email", email.getText().toString());
+                            obj.put("anafilassi", ((CheckBox) view.findViewById(R.id.anafilassi)).isChecked());
+                            obj.put("asma", ((CheckBox) view.findViewById(R.id.asma)).isChecked());
+                            obj.put("mastocitosi", ((CheckBox) view.findViewById(R.id.mastocitosi)).isChecked());
+                            obj.put("polisorbati", ((CheckBox) view.findViewById(R.id.polisorbati)).isChecked());
+                            obj.put("conservanti", ((CheckBox) view.findViewById(R.id.conservanti)).isChecked());
+                            obj.put("saccarosio", ((CheckBox) view.findViewById(R.id.saccarosio)).isChecked());
+                            obj.put("diabete", ((CheckBox) view.findViewById(R.id.diabete)).isChecked());
+                            obj.put("agrumi", ((CheckBox) view.findViewById(R.id.agrumi)).isChecked());
+                            obj.put("polietilenico", ((CheckBox) view.findViewById(R.id.polietilenico)).isChecked());
+                            obj.put("trometamina", ((CheckBox) view.findViewById(R.id.trometamina)).isChecked());
+                            obj.put("orticaria", ((CheckBox) view.findViewById(R.id.orticaria)).isChecked());
+                            obj.put("colite_ulcerosa", ((CheckBox) view.findViewById(R.id.col_ul)).isChecked());
+                            obj.put("insf_renale", ((CheckBox) view.findViewById(R.id.ins_ren)).isChecked());
+                            obj.put("gravidanza", gravidanza.isChecked() ? grav.getText().toString() : false);
+                            obj.put("allattamento", allattamento.isChecked() ? all.getText().toString() : false);
+                        } catch (JSONException e) { e.printStackTrace(); }
+                        new PostData(this).execute(obj);
+                    }
+                    else if(!navigate)
+                    {
+                        NavController nav = Navigation.findNavController(view);
+                        nav.navigate(R.id.action_choose_fragment_to_alredy_fragment);
+                        navigate = true;
+                    }
+                });
             }
         });
     }
 
-    public static void focusEmail() { email.requestFocus(); }
+    public void focusEmail() { email.requestFocus(); }
 
-    private int getEta(String date)
+    public int getEta(String date)
     {
         String todaysDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
         int year = Integer.parseInt(todaysDate.split("/")[2]) - Integer.parseInt(date.split("/")[2]);
@@ -107,7 +123,7 @@ public class ChooseFragment extends Fragment
         return year;
     }
 
-    public static void userHasBooked()
+    public void userHasBooked()
     {
         NavController nav = Navigation.findNavController(instance.getView());
         nav.navigate(R.id.action_choose_fragment_to_booked_fragment);

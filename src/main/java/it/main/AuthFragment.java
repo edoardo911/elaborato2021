@@ -47,14 +47,17 @@ public class AuthFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
         MainActivity.scene = 1;
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(getActivity());
-        String text = "";
-        if(adapter == null)
-            text = "NFC non disponibile";
-        else if(!adapter.isEnabled())
-            text = "Abilita l'NFC dalle impostazioni";
-        if(!text.equals(""))
-            Snackbar.make(view, text, BaseTransientBottomBar.LENGTH_LONG).show();
-        if(MainActivity.auth)
+        if(!MainActivity.auth)
+        {
+            String text = "";
+            if(adapter == null)
+                text = "NFC non disponibile";
+            else if(!adapter.isEnabled())
+                text = "Abilita l'NFC dalle impostazioni";
+            if(!text.equals(""))
+                Snackbar.make(view, text, BaseTransientBottomBar.LENGTH_LONG).show();
+        }
+        else
             setAdmin(getActivity());
     }
 
